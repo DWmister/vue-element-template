@@ -1,7 +1,9 @@
 # vue3 
-`master`为初始化项目，暂无任何功能
-`vue3-ts-template`分支为基础模块
-`vue3-ts-admin`分支为功能模块
+>`master`为初始化项目，暂无任何功能
+>
+>`vue3-ts-template`分支为基础模块
+>
+>`vue3-ts-admin`分支为功能模块
 
 ## Project setup
 ```

@@ -1,25 +1,57 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Layout from '@/views/layout/Layout.vue'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+  scrollBehavior (to, from, savedPosition) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ x: 0, y: 0 })
+      }, 5000)
+    })
+  },
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: '/login',
+      component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue'),
+      meta: { hidden: true },
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/',
+      component: Layout,
+      redirect: '/dashboard',
+      name: 'Dashboard',
+      meta: { hidden: true },
+      children: [{
+        path: 'dashboard',
+        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
+      }]
+    },
+    {
+      path: '/form',
+      component: Layout,
+      children: [
+        {
+          path: 'index',
+          name: 'Form',
+          component: () => import(/* webpackChunkName: "form" */ '@/views/form/form.vue'),
+          meta: { title: 'Form', icon: 'form' },
+        }
+      ]
+    },
+    {
+      path: '/404',
+      component: () => import(/* webpackChunkName: "404" */ '@/views/404.vue'),
+      meta: { hidden: true }
+    },
+    {
+      path: '*',
+      redirect: '/404',
+      meta: { hidden: true }
     }
   ]
 })

@@ -9,11 +9,20 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/nprogress": "^0.0.29",
+    "axios": "^0.18.0",
+    "element-ui": "^2.6.1",
+    "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
+    "path-to-regexp": "^3.0.0",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vue-svgicon": "^3.2.4",
+    "vuex": "^3.0.1",
+    "vuex-class": "^0.3.2",
+    "vuex-module-decorators": "^0.9.8"
   },
   "devDependencies": {
     "@types/jest": "^23.1.4",

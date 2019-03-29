@@ -1,24 +1,6 @@
-import request from '@/utils/request';
 
-export const login = (email: string, password: string) =>
-  request({
-    url: '/user/login',
-    method: 'post',
-    data: {
-      email,
-      password,
-    },
-  });
-
-export const getInfo = (token: string) =>
-  request({
-    url: '/user/info',
-    method: 'get',
-    params: { token },
-  });
-
-export const logout = () =>
-  request({
-    url: '/user/logout',
-    method: 'post',
-  });
+export default {
+  'post@user_login': 'user/login',// 登录
+  'post@user_logout': '/user/logout',// 登出
+  'get@student_getInfo': 'student/getInfo'// 获取table表格数据
+}

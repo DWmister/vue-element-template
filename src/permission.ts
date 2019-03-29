@@ -12,7 +12,6 @@ const whiteList = ['/login'];
 
 router.beforeEach((to: Route, from: Route, next: any) => {
   NProgress.start();
-  console.warn(getToken('access_token'))
   if (getToken('access_token')) {
     if (to.path === '/login') {
       next({ path: '/' });

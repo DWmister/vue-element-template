@@ -44,6 +44,18 @@ export default new Router({
       ]
     },
     {
+      path: '/table',
+      component: Layout,
+      children: [
+        {
+          path: 'index',
+          name: 'Table',
+          component: () => import(/* webpackChunkName: "table" */ '@/views/table/table.vue'),
+          meta: { title: 'Table', icon: 'table' },
+        }
+      ]
+    },
+    {
       path: '/404',
       component: () => import(/* webpackChunkName: "404" */ '@/views/404.vue'),
       meta: { hidden: true }

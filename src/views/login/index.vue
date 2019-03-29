@@ -91,7 +91,6 @@ export default class Login extends mixins(canvas) {
         this.loading = true
         UserModule.Login(this.loginForm)
         .then((res) => {
-          console.warn(res)
           if (res.code === '0x00') {
             this.$message({
               message: res.msg,

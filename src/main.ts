@@ -9,6 +9,7 @@ import SvgIcon from 'vue-svgicon'
 import '@/styles/index.sass'
 import '@/icons/components'
 import '@/permission'
+import http from './utils/request'
 
 Vue.use(ElementUI)
 Vue.use(SvgIcon, {
@@ -18,6 +19,8 @@ Vue.use(SvgIcon, {
 })
 
 Vue.config.productionTip = false
+Vue.prototype.$http = http
+// Vue.use(http)
 
 new Vue({
   router,

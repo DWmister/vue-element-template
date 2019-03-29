@@ -1,5 +1,5 @@
 import { VuexModule, Module, MutationAction, Mutation, Action, getModule } from 'vuex-module-decorators'
-import { login, logout, getInfo } from '@/api/api'
+import { login } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import store from '@/store'
 
@@ -27,7 +27,7 @@ class User extends VuexModule implements IUserState {
         avatar: data.data.avatar
       }
       setToken('access_token', data.data.token)
-      setToken('user_info', JSON.stringify(user_info))
+      setToken('user_info', user_info)
     }
     return data
   }
@@ -42,8 +42,7 @@ class User extends VuexModule implements IUserState {
   @MutationAction({ mutate: [ 'roles', 'name', 'avatar' ] })
   public async GetInfo () {
     const token = getToken('access_token')
-    const user_info: any = getToken('user_info')
-    const data = JSON.parse(user_info)
+    const data: any = getToken('user_info')
     if (token === undefined) {
       throw Error('GetInfo: token is undefined!')
     }

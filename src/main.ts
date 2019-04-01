@@ -10,12 +10,16 @@ import '@/styles/index.sass'
 import '@/icons/components'
 import '@/permission'
 import http from './utils/request'
+import i18n from './lang'
 
 Vue.use(ElementUI)
 Vue.use(SvgIcon, {
   tagName: 'svg-icon',
   defaultWidth: '1em',
   defaultHeight: '1em'
+})
+Vue.use(ElementUI, {
+  i18n: (key: any, value: any) => i18n.t(key, value)
 })
 
 Vue.config.productionTip = false
@@ -25,5 +29,6 @@ Vue.prototype.$http = http
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount('#app')

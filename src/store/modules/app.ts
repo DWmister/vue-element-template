@@ -1,5 +1,5 @@
-// import Cookies from 'js-cookie'
 import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators'
+import { setToken, getToken } from '@/utils/auth'
 import store from '@/store'
 
 export enum DeviceType {
@@ -13,6 +13,7 @@ export interface IAppState {
     opened: boolean
     withoutAnimation: boolean
   }
+  language: string
 }
 
 @Module({ dynamic: true, store, name: 'app' })
@@ -22,6 +23,7 @@ class App extends VuexModule implements IAppState {
     withoutAnimation: false,
   }
   public device = DeviceType.Desktop
+  public language = getToken('language') || 'en'
 
   @Action({ commit: 'TOGGLE_SIDEBAR' })
   public ToggleSideBar(withoutAnimation: boolean) {
@@ -36,6 +38,11 @@ class App extends VuexModule implements IAppState {
   @Action({ commit: 'TOGGLE_DEVICE' })
   public ToggleDevice(device: DeviceType) {
     return device
+  }
+
+  @Action({ commit: 'SET_LANGUAGE' })
+  public SetLanguage(language: string) {
+    return language
   }
 
   @Mutation
@@ -53,6 +60,12 @@ class App extends VuexModule implements IAppState {
   @Mutation
   private TOGGLE_DEVICE(device: DeviceType) {
     this.device = device
+  }
+
+  @Mutation
+  private SET_LANGUAGE(language: string) {
+    setToken('language', language)
+    this.language = language
   }
 }
 

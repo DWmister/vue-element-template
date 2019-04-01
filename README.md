@@ -35,6 +35,12 @@ yarn run lint
 yarn run test:unit
 ```
 
+### Generate all svg components
+```bash
+yarn svg
+# Note: need to run "yarn global add vue-svgicon" first
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 

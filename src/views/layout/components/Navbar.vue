@@ -2,28 +2,36 @@
   <div class="navbar">
     <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
     <breadcrumb />
-    <el-dropdown class="avatar-container" trigger="click">
-      <div class="avatar-wrapper">
-        <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar">
-        <i class="el-icon-caret-bottom"/>
-      </div>
-      <el-dropdown-menu slot="dropdown" class="user-dropdown">
-        <router-link class="inlineBlock" to="/">
-          <el-dropdown-item>
-            Home
+    <div class="right-menu">
+      <template v-if="device">
+        <screenfull class="right-menu-item hover-effect" />
+        <lang-select class="right-menu-item hover-effect" />
+      </template>
+      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+        <div class="avatar-wrapper">
+          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <i class="el-icon-caret-bottom" />
+        </div>
+        <el-dropdown-menu slot="dropdown">
+          <router-link to="/">
+            <el-dropdown-item>
+              {{ $t('navbar.dashboard') }}
+            </el-dropdown-item>
+          </router-link>
+          <el-dropdown-item divided>
+            <span style="display:block;" @click="logout">{{ $t('navbar.logOut') }}</span>
           </el-dropdown-item>
-        </router-link>
-        <el-dropdown-item divided>
-          <span style="display:block" @click="logout">LogOut</span>
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import Hamburger from '@/components/Hamburger/index.vue'
+import Screenfull from '@/components/Screenfull/index.vue'
+import LangSelect from '@/components/LangSelect/index.vue'
 import { Component, Vue } from 'vue-property-decorator'
 import { AppModule } from '@/store/modules/app'
 import { UserModule } from '@/store/modules/user'
@@ -32,63 +40,85 @@ import { UserModule } from '@/store/modules/user'
   components: {
     Breadcrumb,
     Hamburger,
-  },
+    Screenfull,
+    LangSelect
+  }
 })
 export default class Navbar extends Vue {
-  get sidebar() {
+  get sidebar () {
     return AppModule.sidebar
   }
+  get device () {
+    return AppModule.device
+  }
 
-  get avatar() {
+  get avatar () {
     return UserModule.avatar
   }
 
-  private toggleSideBar() {
+  private toggleSideBar () {
     AppModule.ToggleSideBar(false)
   }
 
-  private logout() {
+  private logout () {
     UserModule.LogOut().then(() => {
-      location.reload()  // 为了重新实例化vue-router对象 避免bug
+      location.reload() // 为了重新实例化vue-router对象 避免bug
     })
   }
 }
 </script>
 
-<style lang="sass" scoped>
+<style rel="stylesheet/scss" lang="sass" scoped>
 .navbar
   height: 50px
-  line-height: 50px
+  overflow: hidden
   box-shadow: 0 1px 3px 0 rgba(0,0,0,.12), 0 0 3px 0 rgba(0,0,0,.04)
-
+  line-height: 50px
   .hamburger-container
-    line-height: 58px
-    height: 50px
+    line-height: 46px
+    height: 100%
     float: left
-    padding: 0 10px
-  .screenfull
-    position: absolute
-    right: 90px
-    top: 16px
-    color: red
-  .avatar-container
-    height: 50px
+    cursor: pointer
+    transition: background .3s
+    &:hover
+      background: rgba(0, 0, 0, .025)
+  .breadcrumb-container
+    float: left
+  .errLog-container
     display: inline-block
-    position: absolute
-    right: 35px
-    .avatar-wrapper
-      cursor: pointer
-      margin-top: 5px
-      position: relative
-      line-height: initial
-      .user-avatar
-        width: 40px
-        height: 40px
-        border-radius: 10px
-      .el-icon-caret-bottom
-        position: absolute
-        right: -20px
-        top: 25px
-        font-size: 12px
+    vertical-align: top
+  .right-menu
+    float: right
+    height: 100%
+    line-height: 50px
+    &:focus
+      outline: none
+    .right-menu-item
+      display: inline-block
+      padding: 0 8px
+      height: 100%
+      font-size: 18px
+      color: #5a5e66
+      vertical-align: text-bottom
+      &.hover-effect
+        cursor: pointer
+        transition: background .3s
+        &:hover
+          background: rgba(0, 0, 0, .025)
+    .avatar-container
+      margin-right: 30px
+      .avatar-wrapper
+        margin-top: 5px
+        position: relative
+        .user-avatar
+          cursor: pointer
+          width: 40px
+          height: 40px
+          border-radius: 10px
+        .el-icon-caret-bottom
+          cursor: pointer
+          position: absolute
+          right: -20px
+          top: 25px
+          font-size: 12px
 </style>
-

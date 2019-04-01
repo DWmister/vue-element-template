@@ -5,15 +5,15 @@
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown': !isNest}">
           <svg-icon v-if="onlyOneChild.meta && onlyOneChild.meta.icon" :name="onlyOneChild.meta.icon" />
           <svg-icon v-else-if="item.meta && item.meta.icon" :name="item.meta.icon" />
-          <span v-if="onlyOneChild.meta && onlyOneChild.meta.title" slot="title">{{onlyOneChild.meta.title}}</span>
-          <span v-else-if="item.meta && item.meta.title" slot="title">{{item.meta.title}}</span>
+          <span v-if="onlyOneChild.meta && onlyOneChild.meta.title" slot="title">{{ $t(`route.${onlyOneChild.meta.title}`) }}</span>
+          <span v-else-if="item.meta && item.meta.title" slot="title">{{ $t(`route.${item.meta.title}`) }}</span>
         </el-menu-item>
       </app-link>
     </template>
     <el-submenu v-else :index="resolvePath(item.path)">
       <template slot="title">
         <svg-icon v-if="item.meta && item.meta.icon" :name="item.meta.icon" />
-        <span v-if="item.meta && item.meta.title" slot="title">{{item.meta.title}}</span>
+        <span v-if="item.meta && item.meta.title" slot="title">{{ $t(`route.${item.meta.title}`) }}</span>
       </template>
       <sidebar-item
         v-for="child in item.children"

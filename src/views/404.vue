@@ -25,7 +25,7 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class NotFound extends Vue {
-  get message() {
+  get message () {
     return '404 此页面不存在'
   }
 }
@@ -38,27 +38,25 @@ export default class NotFound extends Vue {
   top: 40%
   left: 50%
 
-
-.wscn-http404 
+.wscn-http404
   position: relative
   width: 1200px
   padding: 0 50px
   overflow: hidden
 
-  .pic-404 
+  .pic-404
     position: relative
     float: left
     width: 600px
     overflow: hidden
 
-    &__parent 
+    &__parent
       width: 100%
-    
 
-    &__child 
+    &__child
       position: absolute
 
-      &.left 
+      &.left
         width: 80px
         top: 17px
         left: 220px
@@ -68,9 +66,8 @@ export default class NotFound extends Vue {
         animation-timing-function: linear
         animation-fill-mode: forwards
         animation-delay: 1s
-      
 
-      &.mid 
+      &.mid
         width: 46px
         top: 10px
         left: 420px
@@ -80,9 +77,8 @@ export default class NotFound extends Vue {
         animation-timing-function: linear
         animation-fill-mode: forwards
         animation-delay: 1.2s
-      
 
-      &.right 
+      &.right
         width: 62px
         top: 100px
         left: 500px
@@ -92,96 +88,78 @@ export default class NotFound extends Vue {
         animation-timing-function: linear
         animation-fill-mode: forwards
         animation-delay: 1s
-      
 
-      @keyframes cloudLeft 
-        0% 
+      @keyframes cloudLeft
+        0%
           top: 17px
           left: 220px
           opacity: 0
-        
 
-        20% 
+        20%
           top: 33px
           left: 188px
           opacity: 1
-        
 
-        80% 
+        80%
           top: 81px
           left: 92px
           opacity: 1
-        
 
-        100% 
+        100%
           top: 97px
           left: 60px
           opacity: 0
-        
-      
 
-      @keyframes cloudMid 
-        0% 
+      @keyframes cloudMid
+        0%
           top: 10px
           left: 420px
           opacity: 0
-        
 
-        20% 
+        20%
           top: 40px
           left: 360px
           opacity: 1
-        
 
-        70% 
+        70%
           top: 130px
           left: 180px
           opacity: 1
-        
 
-        100% 
+        100%
           top: 160px
           left: 120px
           opacity: 0
-        
-      
 
-      @keyframes cloudRight 
-        0% 
+      @keyframes cloudRight
+        0%
           top: 100px
           left: 500px
           opacity: 0
-        
 
-        20% 
+        20%
           top: 120px
           left: 460px
           opacity: 1
-        
 
-        80% 
+        80%
           top: 180px
           left: 340px
           opacity: 1
-        
 
-        100% 
+        100%
           top: 200px
           left: 300px
           opacity: 0
-        
-      
-    
-  
 
-  .text-404 
+  .text-404
     position: relative
     float: left
     width: 300px
     padding: 30px 0
     overflow: hidden
 
-    &__oops 
+    &__oops
       font-size: 32px
       font-weight: bold
       line-height: 40px
@@ -191,9 +169,8 @@ export default class NotFound extends Vue {
       animation-name: slideUp
       animation-duration: 0.5s
       animation-fill-mode: forwards
-    
 
-    &__headline 
+    &__headline
       font-size: 20px
       line-height: 24px
       color: #222
@@ -204,9 +181,8 @@ export default class NotFound extends Vue {
       animation-duration: 0.5s
       animation-delay: 0.1s
       animation-fill-mode: forwards
-    
 
-    &__info 
+    &__info
       font-size: 13px
       line-height: 21px
       color: grey
@@ -216,9 +192,8 @@ export default class NotFound extends Vue {
       animation-duration: 0.5s
       animation-delay: 0.2s
       animation-fill-mode: forwards
-    
 
-    &__return-home 
+    &__return-home
       display: block
       float: left
       width: 110px
@@ -235,19 +210,14 @@ export default class NotFound extends Vue {
       animation-duration: 0.5s
       animation-delay: 0.3s
       animation-fill-mode: forwards
-    
 
-    @keyframes slideUp 
-      0% 
+    @keyframes slideUp
+      0%
         transform: translateY(60px)
         opacity: 0
-      
 
-      100% 
+      100%
         transform: translateY(0)
         opacity: 1
-      
-    
-  
 
 </style>

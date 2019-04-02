@@ -5,26 +5,26 @@ const WIDTH = 992 // refer to Bootstrap's responsive design
 
 @Component
 export default class ResizeHandlerMixin extends Vue {
-  get device() {
+  get device () {
     return AppModule.device
   }
 
-  get sidebar() {
+  get sidebar () {
     return AppModule.sidebar
   }
 
   @Watch('$route')
-  private OnRouteChange() {
+  private OnRouteChange () {
     if (this.device === DeviceType.Mobile && this.sidebar.opened) {
       AppModule.CloseSideBar(false)
     }
   }
 
-  private beforeMount() {
+  private beforeMount () {
     window.addEventListener('resize', this.resizeHandler)
   }
 
-  private mounted() {
+  private mounted () {
     const isMobile = this.isMobile()
     if (isMobile) {
       AppModule.ToggleDevice(DeviceType.Mobile)
@@ -32,12 +32,12 @@ export default class ResizeHandlerMixin extends Vue {
     }
   }
 
-  private isMobile() {
+  private isMobile () {
     const rect = document.body.getBoundingClientRect()
     return rect.width - 1 < WIDTH
   }
 
-  private resizeHandler() {
+  private resizeHandler () {
     if (!document.hidden) {
       const isMobile = this.isMobile()
       AppModule.ToggleDevice(isMobile ? DeviceType.Mobile : DeviceType.Desktop)

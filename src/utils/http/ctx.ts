@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 import db from '@/utils/http/db'
 import { CacheIndex } from './cache'
@@ -13,8 +13,8 @@ import API from '@/api/api'
  * 在res函数中，通过response.config.url能读取真实的url
  * 为了前后对应，只能在req中通过baseURL+url拼出真实的url，且放到全局使用
  */
-let full_url: string = ''
-let cache_api_props: any
+let fullUrl: string = ''
+let cacheApiProps: any
 let states: any = store.state
 let api: any = API
 // export async function req (config: AxiosRequestConfig) {
@@ -25,12 +25,12 @@ export async function req (config: any) {
   } else {
     config.url = api[config.method + '@' + config.url]
   }
-  full_url = `${config.method}@${config.baseURL}/${config.url}`
-  const hasUrl = await server.where(full_url)
+  fullUrl = `${config.method}@${config.baseURL}/${config.url}`
+  const hasUrl = await server.where(fullUrl)
   // 存session 数据不会实时更新 只能存store
-  cache_api_props = states[full_url]
-  if (cache_api_props === undefined) {
-    cache_api_props = states[full_url] = {
+  cacheApiProps = states[fullUrl]
+  if (cacheApiProps === undefined) {
+    cacheApiProps = states[fullUrl] = {
       cacheParams: {},
       disableTime: config.disableTime,
       startTimes: null,
@@ -41,33 +41,33 @@ export async function req (config: any) {
   }
   // 仅缓存get请求的参数
   if (config.method === 'get') {
-    cache_api_props.cacheParams = config.params ? config.params : {}
+    cacheApiProps.cacheParams = config.params ? config.params : {}
   }
   /**
    * 接口操作频繁限制
    * 情况一：请求还未相应就发二次请求
    * disabled: false 已响应
    */
-  if (!cache_api_props.disabled || config.isFilterUrl) {
-    cache_api_props.disabled = true
+  if (!cacheApiProps.disabled || config.isFilterUrl) {
+    cacheApiProps.disabled = true
   } else {
     Message.warning('操作太过频繁，请稍后重试！')
     throw new Error(`${config.url}接口，操作太过频繁，请稍后重试！`)
   }
   /**
    * 接口操作频繁限制
-   * 情况二：设置了接口缓存时间和接口禁止请求时间 
+   * 情况二：设置了接口缓存时间和接口禁止请求时间
    * 且 二次请求时间 - 上次请求时间 < 禁止请求时间
-   * 
+   *
    * 时间单位为毫秒
    * new Date().getTime()：二次请求时间
    * startTimes：上次请求时间
    * disableTime：禁止请求时间
    */
-  if (cache_api_props && cache_api_props.startTimes && config.disableTime) {
-    const interval: number = new Date().getTime() - cache_api_props.startTimes
+  if (cacheApiProps && cacheApiProps.startTimes && config.disableTime) {
+    const interval: number = new Date().getTime() - cacheApiProps.startTimes
     if (interval < config.disableTime * 1000) {
-      cache_api_props.disabled = false
+      cacheApiProps.disabled = false
       Message.warning('操作太过频繁请稍后重试！')
       throw new Error(`${config.url}接口,操作太过频繁请稍后重试！`)
     }
@@ -76,7 +76,7 @@ export async function req (config: any) {
   /**
    * 判断缓存是否过期
    * 缓存过期条件： 本次请求时间 - 上次接口相应时间 > 缓存时间
-   * 
+   *
    * 时间单位为毫秒
    * new Date().getTime()：本次请求时间
    * hasUrl.setTime：上次请求时间
@@ -89,11 +89,11 @@ export async function req (config: any) {
       config.indexDb_cache = true
     }
     // 记录http发送 记录本次的请求时间
-    cache_api_props.startTimes = new Date().getTime()
+    cacheApiProps.startTimes = new Date().getTime()
     // 拉取缓存适配器 读取缓存数据
     if (config.indexDb_cache) {
-      config.adapter = function(config: any) {
-        return CacheIndex(config, full_url)
+      config.adapter = function (config: any) {
+        return CacheIndex(config, fullUrl)
       }
     } else {
       config.adapter = undefined
@@ -103,7 +103,7 @@ export async function req (config: any) {
   if (!hasUrl) {
     db.cacheDate
       .add({
-        url: full_url,
+        url: fullUrl,
         method: config.method,
         remote: config.remote,
         disableTime: config.disableTime,
@@ -120,7 +120,7 @@ export async function req (config: any) {
       console.info('接口地址：', config.url)
       console.info('发出参数：', data)
       console.log('***********************************')
-      console.info('缓存参数：', config.url, cache_api_props.cacheParams)
+      console.info('缓存参数：', config.url, cacheApiProps.cacheParams)
     }
   }
   return config
@@ -128,11 +128,11 @@ export async function req (config: any) {
 
 // export async function res (response: AxiosResponse<any>) {
 export async function res (response: any) {
-  const hasUrl = await server.where(full_url)
-  cache_api_props = states[full_url]
+  const hasUrl = await server.where(fullUrl)
+  cacheApiProps = states[fullUrl]
   // 翻状态(已响应) 设置disabled: false
-  if (cache_api_props && cache_api_props.disabled) {
-    cache_api_props.disabled = false
+  if (cacheApiProps && cacheApiProps.disabled) {
+    cacheApiProps.disabled = false
   }
   // 接口异常收集
   if (response.data && response.data.code !== '0x00') {
@@ -141,7 +141,7 @@ export async function res (response: any) {
       Message.warning(response.data.msg)
     }
     db.errorDate
-      .put({ 
+      .put({
         windowHref: location.href,
         url: response.config.url,
         method: response.config.method,
@@ -153,7 +153,7 @@ export async function res (response: any) {
   // 接口返回正常处理
   if (response.data.code === '0x00') {
     // 更新数据存储
-    if (cache_api_props && cache_api_props.cacheTime && !response.config.indexDb_cache && hasUrl) {
+    if (cacheApiProps && cacheApiProps.cacheTime && !response.config.indexDb_cache && hasUrl) {
       db.cacheDate
         .update(
           hasUrl.id,

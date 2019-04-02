@@ -11,14 +11,15 @@ import '@/icons/components'
 import '@/permission'
 import http from './utils/request'
 import i18n from './lang'
+import { getToken } from '@/utils/auth'
 
-Vue.use(ElementUI)
 Vue.use(SvgIcon, {
   tagName: 'svg-icon',
   defaultWidth: '1em',
   defaultHeight: '1em'
 })
 Vue.use(ElementUI, {
+  size: getToken('size') || 'medium',
   i18n: (key: any, value: any) => i18n.t(key, value)
 })
 

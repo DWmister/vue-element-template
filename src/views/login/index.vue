@@ -90,27 +90,27 @@ export default class Login extends mixins(canvas) {
       if (valid) {
         this.loading = true
         UserModule.Login(this.loginForm)
-        .then((res) => {
-          if (res.code === '0x00') {
-            this.$message({
-              message: res.msg,
-              type: 'success',
-              duration: 1000
-            })
-            this.$router.push({ path: this.redirect || '/' })
-          } else {
-            this.$message({
-              message: res.msg,
-              type: 'error'
-            })
-          }
-        })
-        .catch((err) => {
-          console.warn(err)
-        })
-        .finally(() => {
-          this.loading = false
-        })
+          .then((res) => {
+            if (res.code === '0x00') {
+              this.$message({
+                message: res.msg,
+                type: 'success',
+                duration: 1000
+              })
+              this.$router.push({ path: this.redirect || '/' })
+            } else {
+              this.$message({
+                message: res.msg,
+                type: 'error'
+              })
+            }
+          })
+          .catch((err) => {
+            console.warn(err)
+          })
+          .finally(() => {
+            this.loading = false
+          })
       } else {
         return false
       }

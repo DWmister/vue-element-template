@@ -6,10 +6,12 @@
       <template v-if="device">
         <screenfull class="right-menu-item hover-effect" />
         <lang-select class="right-menu-item hover-effect" />
+        <size-select class="right-menu-item hover-effect" />
       </template>
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <!-- <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar"> -->
+          <img src="@/assets/understanding-flexbox-3.gif" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
@@ -32,6 +34,7 @@ import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import Hamburger from '@/components/Hamburger/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
+import SizeSelect from '@/components/SizeSelect/index.vue'
 import { Component, Vue } from 'vue-property-decorator'
 import { AppModule } from '@/store/modules/app'
 import { UserModule } from '@/store/modules/user'
@@ -41,7 +44,8 @@ import { UserModule } from '@/store/modules/user'
     Breadcrumb,
     Hamburger,
     Screenfull,
-    LangSelect
+    LangSelect,
+    SizeSelect
   }
 })
 export default class Navbar extends Vue {

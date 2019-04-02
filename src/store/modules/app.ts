@@ -13,59 +13,72 @@ export interface IAppState {
     opened: boolean
     withoutAnimation: boolean
   }
-  language: string
+  language: string,
+  size: string
 }
 
 @Module({ dynamic: true, store, name: 'app' })
 class App extends VuexModule implements IAppState {
   public sidebar = {
     opened: false,
-    withoutAnimation: false,
+    withoutAnimation: false
   }
   public device = DeviceType.Desktop
   public language = getToken('language') || 'en'
+  public size = getToken('size') || 'medium'
 
   @Action({ commit: 'TOGGLE_SIDEBAR' })
-  public ToggleSideBar(withoutAnimation: boolean) {
+  public ToggleSideBar (withoutAnimation: boolean) {
     return withoutAnimation
   }
 
   @Action({ commit: 'CLOSE_SIDEBAR' })
-  public CloseSideBar(withoutAnimation: boolean) {
+  public CloseSideBar (withoutAnimation: boolean) {
     return withoutAnimation
   }
 
   @Action({ commit: 'TOGGLE_DEVICE' })
-  public ToggleDevice(device: DeviceType) {
+  public ToggleDevice (device: DeviceType) {
     return device
   }
 
   @Action({ commit: 'SET_LANGUAGE' })
-  public SetLanguage(language: string) {
+  public SetLanguage (language: string) {
     return language
   }
 
+  @Action({ commit: 'SET_SIZE' })
+  public SetSize (size: string) {
+    return size
+  }
+
   @Mutation
-  private TOGGLE_SIDEBAR(withoutAnimation: boolean) {
+  private TOGGLE_SIDEBAR (withoutAnimation: boolean) {
     this.sidebar.opened = !this.sidebar.opened
     this.sidebar.withoutAnimation = withoutAnimation
   }
 
   @Mutation
-  private CLOSE_SIDEBAR(withoutAnimation: boolean) {
+  private CLOSE_SIDEBAR (withoutAnimation: boolean) {
     this.sidebar.opened = false
     this.sidebar.withoutAnimation = withoutAnimation
   }
 
   @Mutation
-  private TOGGLE_DEVICE(device: DeviceType) {
+  private TOGGLE_DEVICE (device: DeviceType) {
     this.device = device
   }
 
   @Mutation
-  private SET_LANGUAGE(language: string) {
+  private SET_LANGUAGE (language: string) {
     setToken('language', language)
     this.language = language
+  }
+
+  @Mutation
+  private SET_SIZE (size: string) {
+    setToken('size', size)
+    this.size = size
   }
 }
 

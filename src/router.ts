@@ -16,9 +16,20 @@ export default new Router({
   },
   routes: [
     {
+      path: '/redirect',
+      component: Layout,
+      meta: { hidden: true },
+      children: [
+        {
+          path: '/redirect/:path*',
+          component: () => import(/* webpackChunkName: "redirect" */ '@/views/redirect/index.vue')
+        }
+      ]
+    },
+    {
       path: '/login',
       component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue'),
-      meta: { hidden: true },
+      meta: { hidden: true }
     },
     {
       path: '/',
@@ -28,7 +39,7 @@ export default new Router({
       meta: { hidden: true },
       children: [{
         path: 'dashboard',
-        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
+        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue')
       }]
     },
     {
@@ -39,7 +50,7 @@ export default new Router({
           path: 'index',
           name: 'Form',
           component: () => import(/* webpackChunkName: "form" */ '@/views/form/form.vue'),
-          meta: { title: 'Form', icon: 'form' },
+          meta: { title: 'Form', icon: 'form' }
         }
       ]
     },
@@ -51,7 +62,7 @@ export default new Router({
           path: 'index',
           name: 'Table',
           component: () => import(/* webpackChunkName: "table" */ '@/views/table/table.vue'),
-          meta: { title: 'Table', icon: 'table' },
+          meta: { title: 'Table', icon: 'table' }
         }
       ]
     },

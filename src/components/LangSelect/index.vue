@@ -18,7 +18,7 @@ import Vue from 'vue'
 import { AppModule } from '@/store/modules/app'
 export default Vue.extend({
   computed: {
-    language(): string {
+    language (): string {
       return AppModule.language
     }
   },

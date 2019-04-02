@@ -2,7 +2,7 @@ export default {
   route: {
     Dashboard: 'Dashboard',
     Form: 'Form',
-    Table: 'Table',
+    Table: 'Table'
   },
   navbar: {
     logOut: 'Log Out',

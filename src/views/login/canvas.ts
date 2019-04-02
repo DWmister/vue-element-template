@@ -10,11 +10,11 @@ let stars: any[] = []
 let rnd: number
 @Component
 export default class ResizeHandlerMixin extends Vue {
-  private mounted() {
+  private mounted () {
     this.canvas()
   }
-  private canvas() {
-    window.onload = function() {
+  private canvas () {
+    window.onload = function () {
       canvas = document.getElementById('canvas')
       canvas.width = WINDOW_WIDTH
       canvas.height = WINDOW_HEIGHT
@@ -23,14 +23,14 @@ export default class ResizeHandlerMixin extends Vue {
       setInterval(render, 33)
       liuxing()
     }
-    function liuxing() {
+    function liuxing () {
       var time = Math.round(Math.random() * 1000 + 55)
-      setTimeout(function() {
+      setTimeout(function () {
         rnd = Math.ceil(Math.random() * stars.length)
         liuxing()
       }, time)
     }
-    function render() {
+    function render () {
       ctx.fillStyle = 'rgba(0,0,0,0.1)'
       ctx.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)
       for (var i = 0; i < num; i++) {
@@ -82,7 +82,7 @@ export default class ResizeHandlerMixin extends Vue {
         ctx.closePath()
       }
     }
-    function addStar() {
+    function addStar () {
       for (var i = 0; i < num; i++) {
         var aStar = {
           x: Math.round(Math.random() * WINDOW_WIDTH),

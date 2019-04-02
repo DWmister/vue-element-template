@@ -20,20 +20,20 @@ import { DeviceType, AppModule } from '@/store/modules/app'
   components: {
     Navbar,
     Sidebar,
-    AppMain,
-  },
+    AppMain
+  }
 })
 export default class Layout extends mixins(ResizeMixin) {
-  get classObj() {
+  get classObj () {
     return {
       hideSidebar: !this.sidebar.opened,
       openSidebar: this.sidebar.opened,
       withoutAnimation: this.sidebar.withoutAnimation,
-      mobile: this.device === DeviceType.Mobile,
+      mobile: this.device === DeviceType.Mobile
     }
   }
 
-  private handleClickOutside() {
+  private handleClickOutside () {
     AppModule.CloseSideBar(false)
   }
 }
@@ -43,14 +43,13 @@ export default class Layout extends mixins(ResizeMixin) {
   @import "src/styles/mixin.sass"
   @import "src/styles/variables.sass"
 
-  .app-wrapper 
+  .app-wrapper
     @include clearfix
     position: relative
     height: 100%
     width: 100%
-  
 
-  .drawer-bg 
+  .drawer-bg
     background: #000
     opacity: 0.3
     width: 100%
@@ -58,16 +57,14 @@ export default class Layout extends mixins(ResizeMixin) {
     height: 100%
     position: absolute
     z-index: 999
-  
 
-  .main-container 
+  .main-container
     min-height: 100%
     transition: margin-left .28s
     margin-left: $sideBarWidth
     position: relative
-  
 
-  .sidebar-container 
+  .sidebar-container
     transition: width 0.28s
     width: $sideBarWidth !important
     height: 100%
@@ -78,46 +75,35 @@ export default class Layout extends mixins(ResizeMixin) {
     left: 0
     z-index: 1001
     overflow: hidden
-  
 
-  .hideSidebar 
-    .main-container 
+  .hideSidebar
+    .main-container
       margin-left: 36px
-    
 
-    .sidebar-container 
+    .sidebar-container
       width: 36px !important
-    
-  
 
   /* for mobile response 适配移动端 */
-  .mobile 
-    .main-container 
+  .mobile
+    .main-container
       margin-left: 0px
-    
 
-    .sidebar-container 
+    .sidebar-container
       transition: transform .28s
       width: $sideBarWidth !important
-    
 
-    &.openSidebar 
+    &.openSidebar
       position: fixed
       top: 0
-    
 
-    &.hideSidebar 
-      .sidebar-container 
+    &.hideSidebar
+      .sidebar-container
         transition-duration: 0.3s
         transform: translate3d(-$sideBarWidth, 0, 0)
-      
-    
-  
 
-  .withoutAnimation 
+  .withoutAnimation
     .main-container,
-    .sidebar-container 
+    .sidebar-container
       transition: none
-    
-  
+
 </style>

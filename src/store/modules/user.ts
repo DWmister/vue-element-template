@@ -21,13 +21,13 @@ class User extends VuexModule implements IUserState {
   public async Login (userInfo: { email: string, password: string}) {
     const data: any = await login(userInfo.email, userInfo.password)
     if (data.code === '0x00') {
-      let user_info = {
+      let userInfo = {
         roles: data.data.roleCode,
         name: data.data.username,
         avatar: data.data.avatar
       }
       setToken('access_token', data.data.token)
-      setToken('user_info', user_info)
+      setToken('userInfo', userInfo)
     }
     return data
   }
@@ -35,14 +35,14 @@ class User extends VuexModule implements IUserState {
   @Action({ commit: 'SET_TOKEN' })
   public async FedLogOut () {
     removeToken('access_token')
-    removeToken('user_info')
+    removeToken('userInfo')
     return ''
   }
 
   @MutationAction({ mutate: [ 'roles', 'name', 'avatar' ] })
   public async GetInfo () {
     const token = getToken('access_token')
-    const data: any = getToken('user_info')
+    const data: any = getToken('userInfo')
     if (token === undefined) {
       throw Error('GetInfo: token is undefined!')
     }
@@ -64,7 +64,7 @@ class User extends VuexModule implements IUserState {
     }
     // await logout()
     removeToken('access_token')
-    removeToken('user_info')
+    removeToken('userInfo')
     return {
       token: '',
       roles: []

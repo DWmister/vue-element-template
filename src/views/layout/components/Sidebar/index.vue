@@ -21,35 +21,34 @@ import SidebarItem from './SidebarItem.vue'
 
 @Component({
   components: {
-    SidebarItem,
-  },
+    SidebarItem
+  }
 })
 export default class SideBar extends Vue {
   @Prop({ default: false }) private collapse!: boolean
 
-  get sidebar() {
+  get sidebar () {
     return AppModule.sidebar
   }
 
-  get routes() {
+  get routes () {
     return (this.$router as any).options.routes
   }
 
-  get isCollapse() {
+  get isCollapse () {
     return !this.sidebar.opened
   }
 }
 </script>
 
 <style lang="sass">
-.horizontal-collapse-transition 
+.horizontal-collapse-transition
   transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out
 
-
-.scrollbar-wrapper 
+.scrollbar-wrapper
   overflow-x: hidden !important
 
-  .el-scrollbar__view 
+  .el-scrollbar__view
     height: 100%
 
 .el-scrollbar__bar

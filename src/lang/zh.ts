@@ -2,7 +2,7 @@ export default {
   route: {
     Dashboard: '首页',
     Form: '表单',
-    Table: '表格',
+    Table: '表格'
   },
   navbar: {
     logOut: '退出登录',

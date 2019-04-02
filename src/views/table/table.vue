@@ -20,16 +20,16 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import  $http  from '@/utils/request'
+import { Component, Vue } from 'vue-property-decorator'
+import $http from '@/utils/request'
 
 @Component
 export default class Table extends Vue {
   private tableData = []
-  created() {
+  created () {
     this.getData()
   }
-  private getData() {
+  private getData () {
     $http
       .get('student_getInfo', {
         params: { name: '章三' }

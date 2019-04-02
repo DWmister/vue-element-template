@@ -58,29 +58,29 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Form extends Vue {
   private form = {
-    name: "",
-    region: "",
-    date1: "",
-    date2: "",
+    name: '',
+    region: '',
+    date1: '',
+    date2: '',
     delivery: false,
     type: [],
-    resource: "",
-    desc: ""
+    resource: '',
+    desc: ''
   }
 
-  private onSubmit() {
-    this.$message("submit!")
+  private onSubmit () {
+    this.$message('submit!')
   }
 
-  private onCancel() {
+  private onCancel () {
     this.$message({
-      message: "cancel!",
-      type: "warning"
+      message: 'cancel!',
+      type: 'warning'
     })
   }
 }
@@ -90,4 +90,3 @@ export default class Form extends Vue {
 .line
   text-align: center
 </style>
-

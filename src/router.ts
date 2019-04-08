@@ -35,11 +35,11 @@ export default new Router({
       path: '/',
       component: Layout,
       redirect: '/dashboard',
-      name: 'Dashboard',
-      meta: { hidden: true },
       children: [{
         path: 'dashboard',
-        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue')
+        name: 'dashboard',
+        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
+        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
       }]
     },
     {

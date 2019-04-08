@@ -1,5 +1,6 @@
 /* tslint:disable */
 import './bug'
+import './dashboard'
 import './example'
 import './exit-fullscreen'
 import './eye-off'

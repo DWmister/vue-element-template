@@ -4,13 +4,14 @@
     <sidebar class="sidebar-container" :collapse="classObj.hideSidebar"/>
     <div class="main-container">
       <navbar/>
+      <tags-view/>
       <app-main/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Navbar, AppMain, Sidebar } from './components'
+import { Navbar, AppMain, Sidebar, TagsView } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 import { Component, Vue } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
@@ -20,7 +21,8 @@ import { DeviceType, AppModule } from '@/store/modules/app'
   components: {
     Navbar,
     Sidebar,
-    AppMain
+    AppMain,
+    TagsView
   }
 })
 export default class Layout extends mixins(ResizeMixin) {

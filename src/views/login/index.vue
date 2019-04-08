@@ -9,7 +9,13 @@
         <span class="svg-container svg-container_login">
           <svg-icon name="user" />
         </span>
-        <el-input v-model="loginForm.email" name="email" type="text" auto-complete="on" placeholder="email" />
+        <el-input 
+          v-model="loginForm.email"
+          ref="email"
+          name="email"
+          type="text"
+          auto-complete="on"
+          placeholder="email" />
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
@@ -17,6 +23,8 @@
         </span>
         <el-input
           :type="pwdType"
+          :key="pwdType"
+          ref="password"
           v-model="loginForm.password"
           name="password"
           auto-complete="on"
@@ -42,7 +50,7 @@ import { mixins } from 'vue-class-component'
 import canvas from './canvas'
 import { UserModule } from '@/store/modules/user'
 import { Route } from 'vue-router'
-import { ElForm } from 'element-ui/types/form'
+import { Form as ElForm, Input } from 'element-ui'
 
 const validateEmail = (rule: any, value: string, callback: any) => {
   if (!isvalidateEmail(value)) {
@@ -74,6 +82,14 @@ export default class Login extends mixins(canvas) {
   private pwdType = 'password'
   private redirect: string | undefined = undefined
 
+  private mounted() {
+    if (this.loginForm.email === '') {
+      (this.$refs.email as Input).focus()
+    } else if (this.loginForm.password === '') {
+      (this.$refs.password as Input).focus()
+    }
+  }
+  
   @Watch('$route', { immediate: true })
   private OnRouteChange (route: Route) {
     // TODO: remove the "as string" hack after v4 release for vue-router
@@ -82,7 +98,15 @@ export default class Login extends mixins(canvas) {
   }
 
   private showPwd () {
-    this.pwdType = this.pwdType === 'password' ? '' : 'password'
+    if (this.pwdType === 'password') {
+      this.pwdType = ''
+    } else {
+      this.pwdType = 'password'
+    }
+    this.$nextTick(() => {
+      (this.$refs.password as Input).focus()
+    })
+    // this.pwdType = this.pwdType === 'password' ? '' : 'password'
   }
 
   private handleLogin () {

@@ -10,8 +10,10 @@
     "svg": "vsvg -s ./src/icons/svg -t ./src/icons/components --ext ts --es6"
   },
   "dependencies": {
+    "@types/crypto-js": "^3.1.43",
     "@types/nprogress": "^0.0.29",
     "axios": "^0.18.0",
+    "crypto-js": "^3.1.9-1",
     "dexie": "^2.0.4",
     "element-ui": "^2.6.1",
     "normalize.css": "^8.0.1",

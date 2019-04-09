@@ -45,6 +45,7 @@
 
 <script lang="ts">
 import { isvalidateEmail } from '@/utils/validate'
+import { md5Encrypt } from '@/utils/util'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import canvas from './canvas'
@@ -113,7 +114,9 @@ export default class Login extends mixins(canvas) {
     (this.$refs.loginForm as ElForm).validate((valid: boolean) => {
       if (valid) {
         this.loading = true
-        UserModule.Login(this.loginForm)
+        const query = JSON.parse(JSON.stringify((this.loginForm)))
+        query.password = md5Encrypt(query.password)
+        UserModule.Login(query)
           .then((res) => {
             if (res.code === '0x00') {
               this.$message({

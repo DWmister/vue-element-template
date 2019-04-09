@@ -8,6 +8,9 @@ const config = {
         cacheDate: '++id,url,method,remote,disableTime,params,cacheTime,setTime,data'
       }
     ]
+  },
+  AES: {
+    "secret": "0KajD7AZcF2QnPr5fwiHRNygmupUTIXx69BWb-hMCGJo_V8Eskz1YdvL34letqSO"
   }
 }
 export default config

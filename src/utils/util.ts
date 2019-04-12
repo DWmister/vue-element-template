@@ -8,7 +8,7 @@ export const AESEncrypt = (str: string) => {
   return ciphertext
 }
 export const AESDecrypt = (str: string) => {
-  const bytes  = CryptoJS.AES.decrypt(str, config.AES.secret)
+  const bytes = CryptoJS.AES.decrypt(str, config.AES.secret)
   const plaintext = bytes.toString(CryptoJS.enc.Utf8)
   return plaintext
 }

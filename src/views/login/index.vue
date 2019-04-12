@@ -9,7 +9,7 @@
         <span class="svg-container svg-container_login">
           <svg-icon name="user" />
         </span>
-        <el-input 
+        <el-input
           v-model="loginForm.email"
           ref="email"
           name="email"
@@ -83,14 +83,13 @@ export default class Login extends mixins(canvas) {
   private pwdType = 'password'
   private redirect: string | undefined = undefined
 
-  private mounted() {
+  private mounted () {
     if (this.loginForm.email === '') {
       (this.$refs.email as Input).focus()
     } else if (this.loginForm.password === '') {
       (this.$refs.password as Input).focus()
     }
   }
-  
   @Watch('$route', { immediate: true })
   private OnRouteChange (route: Route) {
     // TODO: remove the "as string" hack after v4 release for vue-router

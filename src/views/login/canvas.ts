@@ -10,7 +10,7 @@ let stars: any[] = []
 let rnd: number
 @Component
 export default class ResizeHandlerMixin extends Vue {
-  private created() {
+  private created () {
     this.canvas()
   }
   private canvas () {

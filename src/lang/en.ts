@@ -2,7 +2,11 @@ export default {
   route: {
     Dashboard: 'Dashboard',
     Form: 'Form',
-    Table: 'Table'
+    Table: 'Table',
+    upload: 'upload',
+    uploadExcel: 'uploadExcel',
+    uploadPdf: 'uploadPdf',
+    uploadImg: 'uploadImg'
   },
   navbar: {
     logOut: 'Log Out',

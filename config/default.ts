@@ -10,7 +10,7 @@ const config = {
     ]
   },
   AES: {
-    "secret": "0KajD7AZcF2QnPr5fwiHRNygmupUTIXx69BWb-hMCGJo_V8Eskz1YdvL34letqSO"
+    secret: '0KajD7AZcF2QnPr5fwiHRNygmupUTIXx69BWb-hMCGJo_V8Eskz1YdvL34letqSO'
   }
 }
 export default config

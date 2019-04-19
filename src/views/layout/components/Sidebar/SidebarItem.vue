@@ -1,28 +1,26 @@
 <template>
   <div v-if="!item.meta || !item.meta.hidden" :class="['menu-wrapper', collapse ? 'simple-mode' : 'full-mode', {'first-level': !isNest}]">
     <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.meta.noShowingChildren)">
-      <app-link :to="resolvePath(onlyOneChild.path)">
+      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown': !isNest}">
-          <svg-icon v-if="onlyOneChild.meta && onlyOneChild.meta.icon" :name="onlyOneChild.meta.icon" />
-          <svg-icon v-else-if="item.meta && item.meta.icon" :name="item.meta.icon" />
-          <span v-if="onlyOneChild.meta && onlyOneChild.meta.title" slot="title">{{ $t(`route.${onlyOneChild.meta.title}`) }}</span>
-          <span v-else-if="item.meta && item.meta.title" slot="title">{{ $t(`route.${item.meta.title}`) }}</span>
+          <svg-icon :name="onlyOneChild.meta.icon" />
+          <span slot="title">{{ $t(`route.${onlyOneChild.meta.title}`) }}</span>
         </el-menu-item>
       </app-link>
     </template>
-    <el-submenu v-else :index="resolvePath(item.path)">
+    <el-submenu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
       <template slot="title">
         <svg-icon v-if="item.meta && item.meta.icon" :name="item.meta.icon" />
         <span v-if="item.meta && item.meta.title" slot="title">{{ $t(`route.${item.meta.title}`) }}</span>
       </template>
       <sidebar-item
         v-for="child in item.children"
+        :key="child.path"
         :is-nest="true"
         :item="child"
-        :key="child.path"
         :base-path="resolvePath(child.path)"
-        :collapse="collapse"
-        class="nest-menu"/>
+        class="nest-menu"
+      />
     </el-submenu>
   </div>
 </template>
@@ -48,11 +46,11 @@ export default class SidebarItem extends Vue {
   @Prop({ default: false }) private collapse!: boolean
   @Prop({ default: '' }) private basePath!: string
 
-  private onlyOneChild: Route | null = null
+  // private onlyOneChild: Route | null = null
+  private onlyOneChild: any
 
-  private hasOneShowingChild (children: Route[], parent: Route) {
+  private hasOneShowingChild (children: Route[] = [], parent: Route) {
     let showingChildren: Route[] = []
-
     if (children) {
       showingChildren = children.filter((item: Route) => {
         if (item.meta && item.meta.hidden) {
@@ -63,14 +61,14 @@ export default class SidebarItem extends Vue {
         }
       })
     }
-
     if (showingChildren.length === 1) {
       return true
-    } else if (showingChildren.length === 0) {
-      this.onlyOneChild = { ...parent, path: '', meta: { noShowingChildren: true } }
+    }
+    if (showingChildren.length === 0) {
+      this.onlyOneChild = { ...parent, path: '' }
+      this.onlyOneChild.meta.noShowingChildren = true
       return true
     }
-
     this.onlyOneChild = null
     return false
   }

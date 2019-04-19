@@ -2,7 +2,11 @@ export default {
   route: {
     Dashboard: '首页',
     Form: '表单',
-    Table: '表格'
+    Table: '表格',
+    upload: '上传',
+    uploadExcel: '上传excel',
+    uploadPdf: '上传pdf',
+    uploadImg: '上传img'
   },
   navbar: {
     logOut: '退出登录',

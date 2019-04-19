@@ -67,6 +67,33 @@ export default new Router({
       ]
     },
     {
+      path: '/upload',
+      component: Layout,
+      name: 'upload',
+      redirect: 'noredirect',
+      meta: { title: 'upload', icon: 'upload' },
+      children: [
+        {
+          path: 'excel',
+          component: () => import(/* webpackChunkName: "excel" */ '@/views/upload/excel.vue'),
+          name: 'uploadExcel',
+          meta: { title: 'uploadExcel', icon: 'excel' }
+        },
+        {
+          path: 'pdf',
+          component: () => import(/* webpackChunkName: "pdf" */ '@/views/upload/pdf.vue'),
+          name: 'uploadPdf',
+          meta: { title: 'uploadPdf', icon: 'pdf' }
+        },
+        {
+          path: 'img',
+          component: () => import(/* webpackChunkName: "img" */ '@/views/upload/img.vue'),
+          name: 'uploadImg',
+          meta: { title: 'uploadImg', icon: 'img' }
+        }
+      ]
+    },
+    {
       path: '/404',
       component: () => import(/* webpackChunkName: "404" */ '@/views/404.vue'),
       meta: { hidden: true }

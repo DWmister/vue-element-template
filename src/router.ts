@@ -93,6 +93,7 @@ export default new Router({
         }
       ]
     },
+    // router-auto不能删除
     {
       path: '/404',
       component: () => import(/* webpackChunkName: "404" */ '@/views/404.vue'),

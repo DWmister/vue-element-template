@@ -3,6 +3,7 @@ export default {
     Dashboard: 'Dashboard',
     Form: 'Form',
     Table: 'Table',
+    // routerName不能删除
     upload: 'upload',
     uploadExcel: 'uploadExcel',
     uploadPdf: 'uploadPdf',

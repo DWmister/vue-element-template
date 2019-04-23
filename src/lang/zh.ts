@@ -3,6 +3,7 @@ export default {
     Dashboard: '首页',
     Form: '表单',
     Table: '表格',
+    // routerName不能删除''''
     upload: '上传',
     uploadExcel: '上传excel',
     uploadPdf: '上传pdf',

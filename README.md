@@ -12,33 +12,33 @@ yarn install
 
 ### Compiles and hot-reloads for development
 ```
-yarn run serve
+yarn serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn run build
+yarn build
 ```
 
 ### Run your tests
 ```
-yarn run test
+yarn test
 ```
 
 ### Lints and fixes files
 ```
-yarn run lint
+yarn lint
 ```
 
 ### Run your unit tests
 ```
-yarn run test:unit
+yarn test:unit
 ```
 
 ### Generate all svg components
 ```bash
 yarn svg
-# Note: need to run "yarn global add vue-svgicon" first
+# Note: need to "yarn global add vue-svgicon" first
 ```
 
 ### Customize configuration
